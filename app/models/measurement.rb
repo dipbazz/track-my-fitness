@@ -4,4 +4,3 @@ class Measurement < ApplicationRecord
 
   validates :quantity, presence: true
 end
-\
