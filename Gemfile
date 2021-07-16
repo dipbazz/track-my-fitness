@@ -21,7 +21,7 @@ gem 'puma', '~> 5.0'
 gem 'devise', '~> 4.8'
 gem 'jbuilder', '~> 2.11', '>= 2.11.2'
 gem 'jwt', '~> 1.5.4'
-gem 'rack-cors', '~> 0.4.0'
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rubocop', '>= 1.0', '< 2.0'
