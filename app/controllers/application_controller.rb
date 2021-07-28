@@ -13,10 +13,6 @@ class ApplicationController < ActionController::API
     params.deep_transform_keys!(&:underscore)
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-  end
-
   def authenticate_user
     return unless request.headers['Authorization'].present?
 
