@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     return unless request.headers['Authorization'].present?
 
     authenticate_or_request_with_http_token do |token|
-      jwt_payload = JWT.decode(token, Rails.application.secrets.secret_key_base).first
+      jwt_payload = JWT.decode(token, ENV['SECRET_KEY_BASE'] || Rails.application.secrets.secret_key_base).first
 
       @current_user_id = jwt_payload['id']
     rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
