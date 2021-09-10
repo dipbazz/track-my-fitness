@@ -1,2 +1,2 @@
 json.call(user, :id, :email, :bio, :image)
-json.token user.generate_jwt
+json.token generate_jwt(user)

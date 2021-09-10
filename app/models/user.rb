@@ -5,8 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :measurements
-
-  def generate_jwt
-    UserToken.generate_jwt(self)
-  end
 end
