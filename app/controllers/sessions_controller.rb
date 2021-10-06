@@ -1,9 +1,13 @@
 class SessionsController < Devise::SessionsController
   def create
-    user = User.find_by_email(sign_in_params[:email])
+    user = Authentication.new(sign_in_params)
+    p user
+    p '############################'
 
-    if user&.valid_password?(sign_in_params[:password])
-      @current_user = user
+    if user.authenticate
+      authorization_object = Authorization.new(request)
+      current_user = authorization_object.current_user
+      @current_user = User.find(current_user)
     else
       render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
     end
