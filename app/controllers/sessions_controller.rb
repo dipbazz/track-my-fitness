@@ -5,8 +5,10 @@ class SessionsController < Devise::SessionsController
     if auth.authenticate
       render json: {
         message: "Login successful!",
-        token: auth.generate_token,
-        email: auth.email
+        user: {
+          token: auth.generate_token,
+          email: auth.email
+        },
       }, status: :ok
     else
       render json: { errors: { 'email or password' => ['is invalid'] } }, status: :unprocessable_entity
