@@ -1,9 +1,7 @@
 class Authorization
   def initialize(request)
-    p request
-    @token = request.headers['Authorization']
-    p @token
-    p '@@@@@@@@@@@@@@@'
+    token = request.headers['Authorization']
+    @token = token.strip.split(" ")[1]
   end
 
   def current_user

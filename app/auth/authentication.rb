@@ -1,4 +1,6 @@
 class Authentication
+  attr_reader :email
+
   def initialize(user_object)
     @email = user_object[:email]
     @password = user_object[:password]

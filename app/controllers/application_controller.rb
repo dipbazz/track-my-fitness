@@ -16,13 +16,7 @@ class ApplicationController < ActionController::API
   def authenticate_user
     return unless request.headers['Authorization'].present?
 
-    authenticate_or_request_with_http_token do |token|
-      jwt_payload = JWT.decode(token, ENV['SECRET_KEY_BASE'] || Rails.application.secrets.secret_key_base).first
-
-      @current_user_id = jwt_payload['id']
-    rescue JWT::ExpiredSignature, JWT::VerificationError, JWT::DecodeError
-      head :unauthorized
-    end
+    @authorization = Authorization.new(request)
   end
 
   def authenticate_user!(_options = {})
@@ -30,10 +24,10 @@ class ApplicationController < ActionController::API
   end
 
   def current_user
-    @current_user ||= super || User.find(@current_user_id)
+    @current_user ||= super || User.find(@authorization.current_user)
   end
 
   def signed_in?
-    @current_user_id.present?
+    @authorization.current_user.present?
   end
 end
